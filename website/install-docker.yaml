@@ -10,8 +10,9 @@
 
 
     - name: Download Docker GPG key
-		  shell: |
-        curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+      shell: |
+        sudo gpg --recv-keys --keyserver keyserver.ubuntu.com 7EA0A9C3F273FCD8
+        sudo gpg --export --output /usr/share/keyrings/docker-archive-keyring.gpg
         sudo apt update
         sudo apt-cache policy docker-ce
 
