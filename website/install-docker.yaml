@@ -4,11 +4,11 @@
   become: true
   tasks:
     - name: Update APT package cache
-      apt:
+      ansible.builtin.apt:
         update_cache: yes
 
     - name: Install dependencies
-      apt:
+      ansible.builtin.apt:
         name:
           - apt-transport-https
           - ca-certificates
@@ -20,7 +20,7 @@
     - name: Add Docker GPG key
       ansible.builtin.apt_key:
         url: https://download.docker.com/linux/ubuntu/gpg
-        state: present
+        id: 0EBFCD88
 
     - name: Add Docker repository
       ansible.builtin.apt_repository:
@@ -28,6 +28,6 @@
         state: present
 
     - name: Install Docker
-      apt:
+      ansible.builtin.apt:
         name: docker-ce
         state: present
