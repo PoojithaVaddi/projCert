@@ -9,26 +9,22 @@
         sudo apt install apt-transport-https ca-certificates curl software-properties-common -y
 
 
-    - name: Download Docker GPG key
-      shell: |
-        sudo gpg --recv-keys --keyserver keyserver.ubuntu.com 7EA0A9C3F273FCD8
-        sudo gpg --export --output /usr/share/keyrings/docker-archive-keyring.gpg -y
-        sudo apt update
-        sudo apt-cache policy docker-ce
+    - name: Add Docker GPG apt Key
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
 
-    - name: Install Docker
-      shell: |
-        sudo apt install docker-ce
-        sudo systemctl status docker
+    - name: Add Docker Repository
+      apt_repository:
+        repo: deb https://download.docker.com/linux/ubuntu focal stable
+        state: present
 
-    
-    - name: Add username to the docker group
-      command: sudo usermod -aG docker ${USER}
+    - name: Update apt and install docker-ce
+      apt:
+        name: docker-ce
+        state: latest
+        update_cache: true
 
-    
-    - name: Docker info
-      command: docker info
-      register: result
-
-    - debug: 
-        var: result
+    - name: Install Docker Module for Python
+      pip:
+        name: docker
