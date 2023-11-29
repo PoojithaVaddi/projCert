@@ -12,7 +12,7 @@
     - name: Download Docker GPG key
       shell: |
         sudo gpg --recv-keys --keyserver keyserver.ubuntu.com 7EA0A9C3F273FCD8
-        sudo gpg --export --output /usr/share/keyrings/docker-archive-keyring.gpg
+        sudo gpg --export --output /usr/share/keyrings/docker-archive-keyring.gpg -y
         sudo apt update
         sudo apt-cache policy docker-ce
 
