@@ -29,6 +29,10 @@
     #     state: present
 
     - name: Install Docker
-      ansible.builtin.apt:
-        name: docker-ce
-        state: present
+      command: apt install docker-ce -y
+
+    - name: Check docker status
+      register: docker_status
+
+    - debug:
+      var: docker_status
