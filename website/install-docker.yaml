@@ -36,4 +36,4 @@
       register: docker_status
 
     - debug:
-      var: docker_status
+        var: docker_status
