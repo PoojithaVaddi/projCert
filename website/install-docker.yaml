@@ -32,6 +32,7 @@
       command: apt install docker-ce -y
 
     - name: Check docker status
+      command: systemctl status docker
       register: docker_status
 
     - debug:
